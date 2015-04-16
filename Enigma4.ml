@@ -13,7 +13,6 @@
  *)
 
 open Core.Std
-
 (* We use this record to store values about a rotor.
     -comb: is a current substitution string (which is going to be changed
         every encryption of a letter)

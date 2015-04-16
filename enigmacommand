@@ -1,0 +1,14 @@
+# open Printf
+
+  let () =
+
+  if (Sys.argv.(1) = "") then (printf "Please provide a message, rotor order, rotor position, and ring positions\n") else
+  let MSG = Sys.argv.(1)
+  if (Sys.argv.(2) = []) then (printf "Please provide a message, rotor order, rotor position, and ring positions\n") else
+  let rotor = Sys.argv.(2)
+  if (Sys.argv.(3) = "") then (printf "Please provide a message, rotor order, rotor position, and ring positions\n") else
+  let rotorpos = Sys.argv.(3)
+  if (Sys.argv.(4) = "") then (printf "Please provide a message, rotor order, rotor position, and ring positions\n") else
+  let rotorpos2 = Sys.argv.(4)
+
+  done;;

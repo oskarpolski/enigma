@@ -96,7 +96,7 @@ let rotorpos2 = Sys.argv.(4);;
 
 let () =
     if (all_letters Sys.argv.(1) = true) then (MSG) else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
-    if Sys.argv.(2) = "" then break_enigma MSG else (MSG)
+    if (Sys.argv.(2) = ' ') then Enigma4.break_enigma MSG else (MSG)
     if (String.length (Sys.argv.(2)) = 3) && (all_nums Sys.argv.(3) = true) then (rotororder) 
     else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n") 
 
@@ -109,6 +109,7 @@ let () =
 
 Enigma4.enigma MSG ((List.rev rotororder)@reflector) rotorpos rotorpos2
 ;;
+
 
 
 
@@ -163,5 +164,3 @@ Enigma4.enigma MSG ((List.rev rotororder)@reflector) rotorpos rotorpos2
   let _ = Printf.printf encoded_message*)
 
 
-
-  done;;

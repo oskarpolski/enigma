@@ -78,16 +78,16 @@ then false else true
   break_enigma from Decrypt.ml*)
   (**)
 
-    if (all_letters Sys.argv.(1) = true) then (let MSG = Sys.argv.(1)) else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n") else
+    if (all_letters Sys.argv.(1) = true) then (let MSG = Sys.argv.(1)) else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
 	if Sys.argv.(2) = "" then break_enigma MSG
 
-        if (String.length (Sys.argv.(3)) = 3) && (all_nums Sys.argv.(3) = true) then (let rotorpos = Sys.argv.(3)) 
+        if (String.length (Sys.argv.(2)) = 3) && (all_nums Sys.argv.(3) = true) then (let rotororder = Sys.argv.(3)) 
 	else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
 
 	if (String.length (Sys.argv.(3)) = 3) && (all_letters Sys.argv.(3) = true) then (let rotorpos = Sys.argv.(3)) 
 	else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
 
-	if (String.length (Sys.argv.(4)) = 3) && (all_letters Sys.argv.(4) = true) then (let rotorpos = Sys.argv.(4)) 
+	if (String.length (Sys.argv.(4)) = 3) && (all_letters Sys.argv.(4) = true) then (let rotorpos2 = Sys.argv.(4)) 
 	else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
 
 

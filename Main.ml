@@ -2,6 +2,7 @@ open Printf
 open Decrypt
 open Enigma4
 
+
    (* UPDATE ROTORS *)                    
 let r1 = encode_string "EKMFLGDQVZNTOWYHXUSPAIBRCJ"
 let r2 = encode_string "AJDKSIRUXBLHWTMCQGZNPYFVOE"
@@ -11,6 +12,8 @@ let r5 = encode_string "VZBRGITYUPSDNHLXAWMJQOFECK"
 let r6 = encode_string "JPGVOUMFYQBENHZRDKASXLICTW"
 let r7 = encode_string "NZJHGRCXMYSWBOUFAIVLPEKQDT"
 let r8 = encode_string "FKQHTLXOCBJSPDZRAMEWNIUYGV"
+
+let rotors = [r1;r2;r3;r4;r5;r6;r7;r8]
 
 let n1 = encode_string "Q"
 let n2 = encode_string "E"
@@ -73,25 +76,35 @@ then false else true
 let rec string_to_rotor_list (s: string) (n:  int) : rotor list =
   match s.[n] with
   |' ' -> []
-  | _ -> (Enigma4.make_rotor s.[n] ) :: string_to_rotor_list s (n + 1)
+  | a -> let x = char_to_int a in
+	 match x with
+	 | 1 -> (Enigma4.make_rotor r1 alphabet n1 1) :: string_to_rotor_list s (n + 1)
+	 | 2 -> (Enigma4.make_rotor r2 alphabet n2 1) :: string_to_rotor_list s (n + 1)
+	 | 3 -> (Enigma4.make_rotor r3 alphabet n3 1) :: string_to_rotor_list s (n + 1)
+	 | 4 -> (Enigma4.make_rotor r4 alphabet n4 1) :: string_to_rotor_list s (n + 1)
+	 | 5 -> (Enigma4.make_rotor r5 alphabet n5 1) :: string_to_rotor_list s (n + 1)
+	 | 6 -> (Enigma4.make_rotor r6 alphabet n6 1) :: string_to_rotor_list s (n + 1)
+	 | 7 -> (Enigma4.make_rotor r7 alphabet n7 1) :: string_to_rotor_list s (n + 1)
+	 | 8 -> (Enigma4.make_rotor r8 alphabet n8 1) :: string_to_rotor_list s (n + 1)
+	 | _ -> failwith "Rotor numbers must be between 1 and 8"
 ;;
 
 
 let () =
-    if (all_letters Sys.argv.(1) = true) then (let MSG = Sys.argv.(1)) else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+    if (all_letters Sys.argv.(1) = true) then (let MSG = Sys.argv.(1)) else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
     if Sys.argv.(2) = "" then break_enigma MSG
 
     if (String.length (Sys.argv.(2)) = 3) && (all_nums Sys.argv.(3) = true) then (let rotororder = (string_to_rotor_list Sys.argv.(3) 0)) 
-    else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
 
     if (String.length (Sys.argv.(3)) = 3) && (all_letters Sys.argv.(3) = true) then (let rotorpos = Sys.argv.(3)) 
-    else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
 
     if (String.length (Sys.argv.(4)) = 3) && (all_letters Sys.argv.(4) = true) then (let rotorpos2 = Sys.argv.(4)) 
-    else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
 
 
-    Enigma4.enigma MSG (List.rev rotororder) rotorpos rotorpos2
+    Enigma4.enigma MSG ((List.rev rotororder)@reflector) rotorpos rotorpos2
 ;;
 
 

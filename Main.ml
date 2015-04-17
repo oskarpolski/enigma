@@ -27,18 +27,37 @@ let alphabet = encode_string "A B C D E F G H I J K L M N O P Q R S T U V W X Y 
 
   (*TO ZABIE*)
 
+let three_nums (input: string) : bool =
+if (String.contains input 0) ||
+     (String.contains input 1) ||
+     (String.contains input 2) || 
+     (String.contains input 3) || 
+     (String.contains input 4) || 
+     (String.contains input 5) || 
+     (String.contains input 6) || 
+     (String.contains input 7) || 
+     (String.contains input 8) || 
+     (String.contains input 9)
+then true else false
+;;
+
   let () =
   (* Okay, so if there is only one argument we want to run break enigma so you are simply gonna call a function
   break_enigma from Decrypt.ml*)
   (**)
-  if (Sys.argv.(1) = "") then break_enigma Sys.argv.(1) (*(printf "Please provide a message, rotor order, rotor position, and ring positions\n") *)else
-  let MSG = Sys.argv.(1)
-  if (Sys.argv.(2) = []) then (printf "Please provide a message, rotor order, rotor position, and ring positions\n") else
-  let rotor = Sys.argv.(2)
-  if (Sys.argv.(3) = "") then (printf "Please provide a message, rotor order, rotor position, and ring positions\n") else
-  let rotorpos = Sys.argv.(3)
-  if (Sys.argv.(4) = "") then (printf "Please provide a message, rotor order, rotor position, and ring positions\n") else
-  let rotorpos2 = Sys.argv.(4)
+
+    if (Sys.argv.(1) = "") then (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n") else
+      let MSG = Sys.argv.(1) 
+	if Sys.argv.(2) = "" then break_enigma MSG
+
+        if (String.length (Sys.argv.(3)) = 3) && (three_nums Sys.argv.(3) = true) then (let rotorpos = Sys.argv.(3)) 
+	else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+
+	if (String.length (Sys.argv.(3)) = 3) && (three_nums Sys.argv.(3) = false) then (let rotorpos = Sys.argv.(3)) 
+	else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+
+	if (String.length (Sys.argv.(4)) = 3) && (three_nums Sys.argv.(3) = false) then (let rotorpos = Sys.argv.(4)) 
+	else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
 
 
 
@@ -46,7 +65,8 @@ let alphabet = encode_string "A B C D E F G H I J K L M N O P Q R S T U V W X Y 
       MSG HAS TO BE A STRING
       ROTOR HAS TO BE THREE NUMBERS
       ROTORPOS HAS TO BE THREE LETTERS
-      ROTORPOS2 HAS TO BE THREE LETTERS*)
+      ROTORPOS2 HAS TO BE THREE LETTERS
+*)
 
   (* NOW YOUR FUNCTION building a list of three rotors*)
   (*1. You take a string of three numbers (like 647)

@@ -1,8 +1,7 @@
 open Printf
 open Enigma4
 open Decrypt
-
-
+open Core.Std
 
    (* UPDATE ROTORS *)                    
 let r1 = encode_string "EKMFLGDQVZNTOWYHXUSPAIBRCJ"
@@ -95,16 +94,16 @@ let rotorpos = Sys.argv.(3);;
 let rotorpos2 = Sys.argv.(4);;
 
 let () =
-    if (all_letters Sys.argv.(1) = true) then (MSG) else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
-    if (Sys.argv.(2) = ' ') then Enigma4.break_enigma MSG else (MSG)
+    if (all_letters Sys.argv.(1) = true) then (MSG) else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n");
+    if (Sys.argv.(2) = "") then Enigma4.break_enigma MSG else (MSG);
     if (String.length (Sys.argv.(2)) = 3) && (all_nums Sys.argv.(3) = true) then (rotororder) 
-    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n") 
+    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n");
 
     if (String.length (Sys.argv.(3)) = 3) && (all_letters Sys.argv.(3) = true) then (rotorpos) 
-    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n") 
+    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n"); 
 
     if (String.length (Sys.argv.(4)) = 3) && (all_letters Sys.argv.(4) = true) then (rotorpos2) 
-    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n") 
+    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n"); 
 
 
 Enigma4.enigma MSG ((List.rev rotororder)@reflector) rotorpos rotorpos2

@@ -1,3 +1,5 @@
+open Core.Std 
+
 (*
  * Enigma.ml is a program developed by Oskar Kocol as a part of CS51 final project
  * about "Using quadgram anlysis to break German Enigma code" along with
@@ -12,7 +14,6 @@
  *
  *)
 
-open Core.Std
 (* We use this record to store values about a rotor.
     -comb: is a current substitution string (which is going to be changed
         every encryption of a letter)

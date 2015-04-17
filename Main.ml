@@ -76,7 +76,7 @@ then false else true
 let rec string_to_rotor_list (s: string) (n:  int) : rotor list =
   match s.[n] with
   |' ' -> []
-  | a -> let x = char_to_int a in
+  | a -> let x = int_of_char a in
 	 match x with
 	 | 1 -> (Enigma4.make_rotor r1 alphabet n1 1) :: string_to_rotor_list s (n + 1)
 	 | 2 -> (Enigma4.make_rotor r2 alphabet n2 1) :: string_to_rotor_list s (n + 1)
@@ -91,17 +91,16 @@ let rec string_to_rotor_list (s: string) (n:  int) : rotor list =
 
 
 let () =
-    if (all_letters Sys.argv.(1) = true) then (let MSG = Sys.argv.(1)) else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+    if (all_letters Sys.argv.(1) = true) then (let MSG = Sys.argv.(1)) else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n") in
     if Sys.argv.(2) = "" then break_enigma MSG
-
-    if (String.length (Sys.argv.(2)) = 3) && (all_nums Sys.argv.(3) = true) then (let rotororder = (string_to_rotor_list Sys.argv.(3) 0)) 
-    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+    else if (String.length (Sys.argv.(2)) = 3) && (all_nums Sys.argv.(3) = true) then (let rotororder = (string_to_rotor_list Sys.argv.(3) 0)) 
+    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n") in
 
     if (String.length (Sys.argv.(3)) = 3) && (all_letters Sys.argv.(3) = true) then (let rotorpos = Sys.argv.(3)) 
-    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n") in
 
     if (String.length (Sys.argv.(4)) = 3) && (all_letters Sys.argv.(4) = true) then (let rotorpos2 = Sys.argv.(4)) 
-    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n") in
 
 
     Enigma4.enigma MSG ((List.rev rotororder)@reflector) rotorpos rotorpos2

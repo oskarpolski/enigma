@@ -25,8 +25,6 @@ let n8 = encode_string "ZM"
 let u2 = encode_string "YRUHQSLDPXNGOKMIEBFZCWVJAT"
 let alphabet = encode_string "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"
 
-  (*TO ZABIE*)
-
 let all_letters (input: string) : bool =
 if (String.contains input "0") ||
    (String.contains input "1") ||
@@ -68,29 +66,63 @@ let all_nums (input: string) : bool =
      (String.contains input "w") || 
      (String.contains input "x") || 
      (String.contains input "y") || 
-     (String.contains input "z") ||
+     (String.contains input "z")
 then false else true
 ;;
 
+let rec string_to_rotor_list (s = string) (n = int) =
+  match s.[n] with
+  | "" -> []
+  | _ -> (Enigma4.make_rotor s.[n]) :: string_to_rotor_list s (n + 1)
+;;
 
-  let () =
+
+let () =
+    if (all_letters Sys.argv.(1) = true) then (let MSG = Sys.argv.(1)) else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+    if Sys.argv.(2) = "" then break_enigma MSG
+
+    if (String.length (Sys.argv.(2)) = 3) && (all_nums Sys.argv.(3) = true) then (let rotororder = (string_to_rotor_list Sys.argv.(3) 0)) 
+    else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+
+    if (String.length (Sys.argv.(3)) = 3) && (all_letters Sys.argv.(3) = true) then (let rotorpos = Sys.argv.(3)) 
+    else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+
+    if (String.length (Sys.argv.(4)) = 3) && (all_letters Sys.argv.(4) = true) then (let rotorpos2 = Sys.argv.(4)) 
+    else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+
+
+    Enigma4.enigma MSG (List.rev rotororder) rotorpos rotorpos2
+;;
+
+
+
+
+
+(* 
+
+    if (all_letters Sys.argv.(1) = true) then (let MSG = Sys.argv.(1)) else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+    if Sys.argv.(2) = "" then break_enigma MSG
+
+    if (String.length (Sys.argv.(2)) = 3) && (all_nums Sys.argv.(3) = true) then (let rotororder = (string_to_rotor_list Sys.argv.(3) 0)) 
+    else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+
+    if (String.length (Sys.argv.(3)) = 3) && (all_letters Sys.argv.(3) = true) then (let rotorpos = Sys.argv.(3)) 
+    else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+
+    if (String.length (Sys.argv.(4)) = 3) && (all_letters Sys.argv.(4) = true) then (let rotorpos2 = Sys.argv.(4)) 
+    else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+
+*)
+
+
+
+
+
+
+
   (* Okay, so if there is only one argument we want to run break enigma so you are simply gonna call a function
   break_enigma from Decrypt.ml*)
   (**)
-
-    if (all_letters Sys.argv.(1) = true) then (let MSG = Sys.argv.(1)) else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
-	if Sys.argv.(2) = "" then break_enigma MSG
-
-        if (String.length (Sys.argv.(2)) = 3) && (all_nums Sys.argv.(3) = true) then (let rotororder = Sys.argv.(3)) 
-	else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
-
-	if (String.length (Sys.argv.(3)) = 3) && (all_letters Sys.argv.(3) = true) then (let rotorpos = Sys.argv.(3)) 
-	else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
-
-	if (String.length (Sys.argv.(4)) = 3) && (all_letters Sys.argv.(4) = true) then (let rotorpos2 = Sys.argv.(4)) 
-	else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
-
-
 
   (* NOW CHECK EACH OF THE ARGUMENTS:
       MSG HAS TO BE A STRING

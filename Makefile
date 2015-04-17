@@ -6,7 +6,7 @@ WE NEED SOMETHING SIMILAR
 PLEASE, DO IT BY TONIGHT!
 
 
-all: moogle
+all: 
 
 # These must be in the right order--no forward refs
 FILES = order.ml dict.ml myset.ml graph.ml nodescore.ml util.ml \

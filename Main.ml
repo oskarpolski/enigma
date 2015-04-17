@@ -26,47 +26,47 @@ let u2 = encode_string "YRUHQSLDPXNGOKMIEBFZCWVJAT"
 let alphabet = encode_string "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"
 
 let all_letters (input: string) : bool =
-if (String.contains input "0") ||
-   (String.contains input "1") ||
-   (String.contains input "2") || 
-   (String.contains input "3") || 
-   (String.contains input "4") || 
-   (String.contains input "5") || 
-   (String.contains input "6") || 
-   (String.contains input "7") || 
-   (String.contains input "8") || 
-   (String.contains input "9")
+if (String.contains input '0') ||
+   (String.contains input '1') ||
+   (String.contains input '2') || 
+   (String.contains input '3') || 
+   (String.contains input '4') || 
+   (String.contains input '5') || 
+   (String.contains input '6') || 
+   (String.contains input '7') || 
+   (String.contains input '8') || 
+   (String.contains input '9')
 then false else true
 ;;
 
 let all_nums (input: string) : bool =
   let input = String.lowercase input in
-  if (String.contains input "a") ||
-     (String.contains input "b") ||
-     (String.contains input "c") || 
-     (String.contains input "d") || 
-     (String.contains input "e") || 
-     (String.contains input "f") || 
-     (String.contains input "g") || 
-     (String.contains input "h") || 
-     (String.contains input "i") || 
-     (String.contains input "j") ||
-     (String.contains input "k") ||
-     (String.contains input "l") || 
-     (String.contains input "m") || 
-     (String.contains input "n") || 
-     (String.contains input "o") || 
-     (String.contains input "p") || 
-     (String.contains input "q") || 
-     (String.contains input "r") ||
-     (String.contains input "s") ||
-     (String.contains input "t") || 
-     (String.contains input "u") || 
-     (String.contains input "v") || 
-     (String.contains input "w") || 
-     (String.contains input "x") || 
-     (String.contains input "y") || 
-     (String.contains input "z")
+  if (String.contains input 'a') ||
+     (String.contains input 'b') ||
+     (String.contains input 'c') || 
+     (String.contains input 'd') || 
+     (String.contains input 'e') || 
+     (String.contains input 'f') || 
+     (String.contains input 'g') || 
+     (String.contains input 'h') || 
+     (String.contains input 'i') || 
+     (String.contains input 'j') ||
+     (String.contains input 'k') ||
+     (String.contains input 'l') || 
+     (String.contains input 'm') || 
+     (String.contains input 'n') || 
+     (String.contains input 'o') || 
+     (String.contains input 'p') || 
+     (String.contains input 'q') || 
+     (String.contains input 'r') ||
+     (String.contains input 's') ||
+     (String.contains input 't') || 
+     (String.contains input 'u') || 
+     (String.contains input 'v') || 
+     (String.contains input 'w') || 
+     (String.contains input 'x') || 
+     (String.contains input 'y') || 
+     (String.contains input 'z')
 then false else true
 ;;
 

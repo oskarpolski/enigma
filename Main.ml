@@ -70,7 +70,7 @@ let all_nums (input: string) : bool =
 then false else true
 ;;
 
-let rec string_to_rotor_list (s = string) (n = int) =
+let rec string_to_rotor_list (s: string) (n:  int) : rotor list =
   match s.[n] with
   | "" -> []
   | _ -> (Enigma4.make_rotor s.[n]) :: string_to_rotor_list s (n + 1)

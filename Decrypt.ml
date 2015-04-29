@@ -1,46 +1,45 @@
-
 open Core.Std
 open Printf
+open Enigma4
 
-let rotors = [1; 2; 3; 4; 5; 6; 7; 8]
-let total_rotors = 3
+let rotors = 
+  List.map [(r1, n1); (r2, n2); (r3, n3); (r4, n4); (r5, n5); (r6, n6); (r7, n7); (r8, n8)] ~f:(fun x -> 
+    match x with
+    |(r, n) -> make_rotor r alphabet n 1)
 
-let make_list k: ('a*'a*'a) : 'a list =
-  match k with
-  |(a, b, c) -> [a; b; c]
+let reflector = make_rotor u2 alphabet [] 1
 
 (* run on utop and type in: create rotors rotors rotors*)
-let rec create (start: 'a list) (left: 'a list) (right: 'a list) : 'a list list=
+let rec create (start: 'a list) (left: 'a list) (right: 'a list) (refl: 'a): 'a list list=
 let rec list_of_two (x: 'a) (y: 'a) (l: 'a list) : 'a list list=
   match l with
   |[] -> []
   |[hd] -> if hd = x || hd = y then []
-    else [[x; y; hd]]
+    else [[x; y; hd; refl]]
   |hd::tl -> if hd = x || hd = y then list_of_two x y tl
-    else [x; y; hd] :: (list_of_two x y tl) in
+    else [x; y; hd; refl] :: (list_of_two x y tl) in
   match left with
   |[] -> []
   |[hd1] ->
     (match right with
     |[] -> []
     |[hd2] -> if hd1 = hd2 then []
-      else (list_of_two hd1 hd2 start) @ (create start [] [])
-    |hd2::tl2 -> if hd1 = hd2 then create start left tl2
-      else (list_of_two hd1 hd2 start) @ (create start left tl2)
+      else (list_of_two hd1 hd2 start) @ (create start [] [] refl)
+    |hd2::tl2 -> if hd1 = hd2 then create start left tl2 refl
+      else (list_of_two hd1 hd2 start) @ (create start left tl2 refl)
      )
   |hd1::tl1 ->
     (match right with
     |[] -> []
-    |[hd2] -> if hd1 = hd2 then create start tl1 start
-      else (list_of_two hd1 hd2 start) @ (create start tl1 start)
-    |hd2::tl2 -> if hd1 = hd2 then create start left tl2
-      else (list_of_two hd1 hd2 start) @ (create start left tl2)
+    |[hd2] -> if hd1 = hd2 then create start tl1 start refl
+      else (list_of_two hd1 hd2 start) @ (create start tl1 start refl)
+    |hd2::tl2 -> if hd1 = hd2 then create start left tl2 refl
+      else (list_of_two hd1 hd2 start) @ (create start left tl2 refl)
     )
 
 (* THIS IS FOR DEBUGGING ONLY IT HAS TO BE CHANGED TO AN ACTUAL FUNCTION*)
-let karen_function (triple: (int*int*int)) : float =
-  match triple with
-  |(a,b,c) -> Printf.printf "(%d, %d, %d) " a b c;
+let karen_function (mess: bytes) : float =
+  Printf.printf "(%d, %d, %d) " a b c;
       0.0
       
 (* Generates all the grund possibilities, runs karen_function on them and returns

@@ -12,4 +12,5 @@ Hello in order to run our code Enigma! You have to use EMACS!
 	3. In order to Decrypt a mesage you have to open Decrypt.ml and once again compile the code using Ctrl C Ctrl B
 	Decrypt.ml TAKES A LONG TIME TO RUN, it goes through over 18 billion of different options and may take 10 to 30 minutes in order
 	to decrypt the message. 
+	4. In terminal you make the whole file and then type break_enigma "message" and it will break the message
 	

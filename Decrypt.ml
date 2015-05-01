@@ -1,6 +1,7 @@
 open Core.Std
 open Printf
 open Enigma4
+open quadgrams
 
 let rotors = 
   List.map [(r1, n1); (r2, n2); (r3, n3); (r4, n4); (r5, n5); (r6, n6); (r7, n7); (r8, n8)] ~f:(fun x -> 
@@ -55,8 +56,7 @@ let enigma_b (message: bytes) (rotors: rotor list) (grund: int list) (ringstel: 
 
 (* THIS IS FOR DEBUGGING ONLY IT HAS TO BE CHANGED TO AN ACTUAL FUNCTION*)
 let karen_function (mess: bytes) : float =
-  (*Printf.printf "%s " mess;*)
-      0.0
+score_calculator mess
      
 (*Makes a list of all combinations of rotors*)
 let all_pos = create rotors rotors rotors reflector

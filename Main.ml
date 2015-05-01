@@ -1,6 +1,7 @@
 open Printf
-open Decrypt
 open Enigma4
+open Decrypt
+
 
 
    (* UPDATE ROTORS *)                    
@@ -88,22 +89,25 @@ let rec string_to_rotor_list (s: string) (n:  int) : rotor list =
 	 | 8 -> (Enigma4.make_rotor r8 alphabet n8 1) :: string_to_rotor_list s (n + 1)
 	 | _ -> failwith "Rotor numbers must be between 1 and 8"
 ;;
-
+let MSG = Sys.argv.(1);;
+let rotororder = (string_to_rotor_list Sys.argv.(3) 0);;
+let rotorpos = Sys.argv.(3);;
+let rotorpos2 = Sys.argv.(4);;
 
 let () =
-    if (all_letters Sys.argv.(1) = true) then (let MSG = Sys.argv.(1)) else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n") in
-    if Sys.argv.(2) = "" then break_enigma MSG
-    else if (String.length (Sys.argv.(2)) = 3) && (all_nums Sys.argv.(3) = true) then (let rotororder = (string_to_rotor_list Sys.argv.(3) 0)) 
-    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n") in
+    if (all_letters Sys.argv.(1) = true) then (MSG) else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
+    if Sys.argv.(2) = "" then break_enigma MSG else (MSG)
+    if (String.length (Sys.argv.(2)) = 3) && (all_nums Sys.argv.(3) = true) then (rotororder) 
+    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n") 
 
-    if (String.length (Sys.argv.(3)) = 3) && (all_letters Sys.argv.(3) = true) then (let rotorpos = Sys.argv.(3)) 
-    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n") in
+    if (String.length (Sys.argv.(3)) = 3) && (all_letters Sys.argv.(3) = true) then (rotorpos) 
+    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n") 
 
-    if (String.length (Sys.argv.(4)) = 3) && (all_letters Sys.argv.(4) = true) then (let rotorpos2 = Sys.argv.(4)) 
-    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n") in
+    if (String.length (Sys.argv.(4)) = 3) && (all_letters Sys.argv.(4) = true) then (rotorpos2) 
+    else (failwith "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n") 
 
 
-    Enigma4.enigma MSG ((List.rev rotororder)@reflector) rotorpos rotorpos2
+Enigma4.enigma MSG ((List.rev rotororder)@reflector) rotorpos rotorpos2
 ;;
 
 

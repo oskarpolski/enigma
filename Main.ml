@@ -25,111 +25,28 @@ let n8 = encode_string "ZM"
 let u2 = encode_string "YRUHQSLDPXNGOKMIEBFZCWVJAT"
 let alphabet = encode_string "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"
 
-let all_letters (input: string) : bool =
-if (String.contains input "0") ||
-   (String.contains input "1") ||
-   (String.contains input "2") || 
-   (String.contains input "3") || 
-   (String.contains input "4") || 
-   (String.contains input "5") || 
-   (String.contains input "6") || 
-   (String.contains input "7") || 
-   (String.contains input "8") || 
-   (String.contains input "9")
-then false else true
-;;
+  (*TO ZABIE*)
 
-let all_nums (input: string) : bool =
-  let input = String.lowercase input in
-  if (String.contains input "a") ||
-     (String.contains input "b") ||
-     (String.contains input "c") || 
-     (String.contains input "d") || 
-     (String.contains input "e") || 
-     (String.contains input "f") || 
-     (String.contains input "g") || 
-     (String.contains input "h") || 
-     (String.contains input "i") || 
-     (String.contains input "j") ||
-     (String.contains input "k") ||
-     (String.contains input "l") || 
-     (String.contains input "m") || 
-     (String.contains input "n") || 
-     (String.contains input "o") || 
-     (String.contains input "p") || 
-     (String.contains input "q") || 
-     (String.contains input "r") ||
-     (String.contains input "s") ||
-     (String.contains input "t") || 
-     (String.contains input "u") || 
-     (String.contains input "v") || 
-     (String.contains input "w") || 
-     (String.contains input "x") || 
-     (String.contains input "y") || 
-     (String.contains input "z")
-then false else true
-;;
-
-let rec string_to_rotor_list (s : string) (n : int) =
-  match s.[n] with
-  | "" -> []
-  | _ -> (Enigma4.make_rotor s.[n]) :: string_to_rotor_list s (n + 1)
-;;
-
-
-let () =
-    if (all_letters Sys.argv.(1) = true) then (let MSG = Sys.argv.(1)) else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
-    if Sys.argv.(2) = "" then break_enigma MSG
-
-    if (String.length (Sys.argv.(2)) = 3) && (all_nums Sys.argv.(3) = true) then (let rotororder = (string_to_rotor_list Sys.argv.(3) 0)) 
-    else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
-
-    if (String.length (Sys.argv.(3)) = 3) && (all_letters Sys.argv.(3) = true) then (let rotorpos = Sys.argv.(3)) 
-    else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
-
-    if (String.length (Sys.argv.(4)) = 3) && (all_letters Sys.argv.(4) = true) then (let rotorpos2 = Sys.argv.(4)) 
-    else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
-
-
-    Enigma4.enigma MSG (List.rev rotororder) rotorpos rotorpos2
-;;
-
-
-
-
-
-(* 
-
-    if (all_letters Sys.argv.(1) = true) then (let MSG = Sys.argv.(1)) else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
-    if Sys.argv.(2) = "" then break_enigma MSG
-
-    if (String.length (Sys.argv.(2)) = 3) && (all_nums Sys.argv.(3) = true) then (let rotororder = (string_to_rotor_list Sys.argv.(3) 0)) 
-    else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
-
-    if (String.length (Sys.argv.(3)) = 3) && (all_letters Sys.argv.(3) = true) then (let rotorpos = Sys.argv.(3)) 
-    else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
-
-    if (String.length (Sys.argv.(4)) = 3) && (all_letters Sys.argv.(4) = true) then (let rotorpos2 = Sys.argv.(4)) 
-    else (printf "Please provide a message, a three number rotor order, a three letter rotor position, and a three letter ring positions\n")
-
-*)
-
-
-
-
-
-
-
+  let () =
   (* Okay, so if there is only one argument we want to run break enigma so you are simply gonna call a function
   break_enigma from Decrypt.ml*)
   (**)
+  if (Sys.argv.(1) = "") then break_enigma Sys.argv.(1) (*(printf "Please provide a message, rotor order, rotor position, and ring positions\n") *)else
+  let MSG = Sys.argv.(1)
+  if (Sys.argv.(2) = []) then (printf "Please provide a message, rotor order, rotor position, and ring positions\n") else
+  let rotor = Sys.argv.(2)
+  if (Sys.argv.(3) = "") then (printf "Please provide a message, rotor order, rotor position, and ring positions\n") else
+  let rotorpos = Sys.argv.(3)
+  if (Sys.argv.(4) = "") then (printf "Please provide a message, rotor order, rotor position, and ring positions\n") else
+  let rotorpos2 = Sys.argv.(4)
+
+
 
   (* NOW CHECK EACH OF THE ARGUMENTS:
       MSG HAS TO BE A STRING
       ROTOR HAS TO BE THREE NUMBERS
       ROTORPOS HAS TO BE THREE LETTERS
-      ROTORPOS2 HAS TO BE THREE LETTERS
-*)
+      ROTORPOS2 HAS TO BE THREE LETTERS*)
 
   (* NOW YOUR FUNCTION building a list of three rotors*)
   (*1. You take a string of three numbers (like 647)
@@ -152,7 +69,7 @@ let () =
 
   (* if all of above are true then run function from Enigma4
     let encoded_message = enigma MSG (encode_string MSG) rotorlist rotorpos rotorpos2
-  let _ = Printf.printf encoded_message*)
+  let _ = Printf.printf *)
 
 
 

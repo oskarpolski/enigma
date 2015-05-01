@@ -109,13 +109,13 @@ let grundbreaker (message: bytes) (rotors: rotor list list) : (int list * rotor 
      outcome
 
 (* TESTING *)
-let shortrotors = 
+(*let shortrotors = 
   List.map [(r1, n1); (r2, n2); (r3, n3); (r4, n4)] ~f:(fun x -> 
     match x with
     |(r, n) -> make_rotor r alphabet n 1)
 let supershort = [[r33a;r22a;r11a;reflector]]
 let a = grundbreaker "ERRJKOCSN" supershort;;
-
+*)
 
 (*Generates all needed ringsettings and runs karen_function and returns the setting with the
  highest score*)
@@ -144,10 +144,15 @@ let ringfeeder (messag: bytes) (grundsettings: (int list * rotor list)): int lis
     |(a, b, c) -> [a;b;c]
 
 (* CHECK *)
+let rotorsshort = 
+  List.map [(r1, n1); (r2, n2); (r3, n3)] ~f:(fun x -> 
+    match x with
+    |(r, n) -> make_rotor r alphabet n 1)
+
   let break_enigma (messag: bytes) : bytes =
 
   let t00 = Unix.time() in
-    let rotors = [[r33a;r22a;r11a;reflector]] in
+    let rotors = create rotorsshort rotorsshort rotorsshort reflector in
     let rotor_and_grund = grundbreaker messag  rotors in
     match rotor_and_grund with
     |(grund, rotor) ->
@@ -160,6 +165,9 @@ let ringfeeder (messag: bytes) (grundsettings: (int list * rotor list)): int lis
 
 
 (* TESTING *)
+let broken = break_enigma "VFQRDXTWHXUJQEJWGUSHOEJEDBMSFXPDBSCPPSUWXVBDH";;
+
+(*
 let shortrotors = 
   List.map [(r1, n1); (r2, n2); (r3, n3); (r4, n4)] ~f:(fun x -> 
     match x with
@@ -174,3 +182,4 @@ let message = "QWERTY"
 let first_stage = enigma_b message foundrtr foundgrund [1;1;1]
 let foundring = ringfeeder (enigma_b message foundrtr foundgrund [1;1;1]) a
 let last_stage = enigma_b message foundrtr foundgrund foundring;;
+*)

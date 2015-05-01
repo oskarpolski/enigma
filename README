@@ -1,0 +1,12 @@
+Hello in order to run our code Enigma! You have to use EMACS! 
+	1. open up Enigma4.ml  and compile the code using Ctrl C Ctrl B!
+	2. In order to run Enigma, after the code has finished compiling type in the following lines
+			Enigma "Your Message" list "3 Letters" "3 Letters" 
+				list is just a prebuilt rotor order, we built this in for ease, but you are free to use one of our 5 rotors.
+				the settings can be typed like this let list = [r33a; r22a; r11a; refl];;
+			A typical Command Line can Look like 
+				Enigma "My name is Bob" list "AFK" "YHZ";;
+				and you should get Bytes = "Decrypted message"
+	3. In order to Decrypt a mesage you have to open Decrypt.ml and once again compile the code using Ctrl C Ctrl B
+	
+	
